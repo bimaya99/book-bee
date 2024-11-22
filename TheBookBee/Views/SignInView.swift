@@ -161,7 +161,7 @@ struct SignInView: View {
             focusedField = .email // Automatically focus the email field when the view appears
         }
         .background(
-            NavigationLink(destination: PersonalizeView().environmentObject(appState), isActive: $navigateToPersonalizeView) {
+            NavigationLink(destination: MainTabView().environmentObject(appState), isActive: $navigateToPersonalizeView) {
                 EmptyView()
             }
         )

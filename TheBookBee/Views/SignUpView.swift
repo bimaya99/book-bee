@@ -7,8 +7,9 @@ struct SignUpView: View {
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
     @State private var username: String = ""  // Added for the custom user
-    @State private var showingError = false
-    @State private var errorMessage = ""
+    @State private var showingAlert = false
+    @State private var title = "Error"
+    @State private var message = ""
 
     @EnvironmentObject var appState: AppState  // Ensure AppState is injected here
 
@@ -81,24 +82,24 @@ struct SignUpView: View {
         }
         .padding()
         .background(Color("background_grey"))
-        .alert("Error", isPresented: $showingError) {
+        .alert(title, isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         } message: {
-            Text(errorMessage)
+            Text(message)
         }
     }
 
     private func signUp() {
         guard password == confirmPassword else {
-            errorMessage = "Passwords do not match."
-            showingError = true
+            message = "Passwords do not match."
+            showingAlert = true
             return
         }
 
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                errorMessage = error.localizedDescription
-                showingError = true
+                message = error.localizedDescription
+                showingAlert = true
                 return
             }
 
@@ -141,6 +142,14 @@ struct SignUpView: View {
                     print("Error saving user info: \(error.localizedDescription)")
                 } else {
                     print("User info successfully saved!")
+
+                    appState.hasCompletedOnboarding = false
+                    
+                    DispatchQueue.main.async {
+                        message = "User info successfully saved!"
+                        title = "Success"
+                        showingAlert = true
+                    }
                 }
             }
         } catch {

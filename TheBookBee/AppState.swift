@@ -153,6 +153,22 @@ class AppState: ObservableObject {
             }
         }
     }
+
+    func saveGoals(yearlyGoal: Int, dailyReadingGoal: Int, completion: @escaping (Error?) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            completion(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"]))
+            return
+        }
+
+        let userData: [String: Any] = [
+            "yearlyGoal": yearlyGoal,
+            "dailyReadingGoal": dailyReadingGoal
+        ]
+
+        db.collection("users").document(user.uid).setData(userData, merge: true) { error in
+            completion(error)
+        }
+    }
     
     // Update onboarding completion status
     func completeOnboarding() {

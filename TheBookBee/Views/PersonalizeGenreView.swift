@@ -7,6 +7,7 @@ struct PersonalizeGenreView: View {
     @State private var selectedGenres: [String] = []
     @State private var isLoading: Bool = false
     @State private var errorMessage: String? = nil // To show error messages
+    @State private var navigateToDashboard: Bool = false // Navigation state
 
     @EnvironmentObject var appState: AppState
 
@@ -32,11 +33,18 @@ struct PersonalizeGenreView: View {
                 Text("Save")
                     .font(.headline)
                     .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                    .background(Color("F8C95A"))
+                    .cornerRadius(10)
+                    .padding(.top, 40)
             }
             .padding()
+            .disabled(isLoading) // Disable button while saving
+
+            NavigationLink(destination: MainTabView().environmentObject(appState), isActive: $navigateToDashboard) {
+                EmptyView()
+            }
 
             if isLoading {
                 ProgressView()
@@ -47,8 +55,10 @@ struct PersonalizeGenreView: View {
                     .foregroundColor(.red)
                     .padding()
             }
+            
         }
         .padding()
+        
     }
 
     private func toggleGenreSelection(_ genre: String) {
@@ -69,14 +79,14 @@ struct PersonalizeGenreView: View {
             return
         }
 
-        appState.saveGenres(genres: selectedGenres) { error in
-            isLoading = false
-            if let error = error {
-                errorMessage = "Error saving selected genres: \(error.localizedDescription)"
-            } else {
-                print("Selected genres saved successfully")
-            }
+        appState.saveGenres(genres: selectedGenres)
+        isLoading = false // Reset loading state
+        appState.completeOnboarding() // Mark onboarding as complete
+        // Refresh the app state to trigger the navigation
+        DispatchQueue.main.async {
+            navigateToDashboard = true
         }
+
     }
 
     private var genres: [String] {
@@ -105,6 +115,6 @@ struct GenreTagP: View {
 struct PersonalizeGenreView_Previews: PreviewProvider {
     static var previews: some View {
         PersonalizeGenreView()
-            .environmentObject(AppState())
+            .environmentObject(AppState()) // Ensure AppState is provided in the preview
     }
 }

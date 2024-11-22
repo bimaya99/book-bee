@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @State private var navigateToPersonalizeView: Bool = false // Navigation state
+
     @EnvironmentObject var appState: AppState
 
     var body: some View {
@@ -32,8 +34,7 @@ struct OnboardingView: View {
                 // "Get Started" Button
                 Button(action: {
                     // This will trigger the navigation to PersonalizeView
-                    // based on the logic in TheBookBeeApp
-                    appState.hasCompletedOnboarding = true
+                    navigateToPersonalizeView = true
                 }) {
                     Text("Get Started")
                         .font(.headline)
@@ -46,6 +47,10 @@ struct OnboardingView: View {
                 .padding(.horizontal, 20)
                 
                 Spacer() // This Spacer keeps the button at the bottom
+            }
+
+            NavigationLink(destination: PersonalizeView().environmentObject(appState), isActive: $navigateToPersonalizeView) {
+                EmptyView()
             }
         }
         .navigationBarBackButtonHidden(true)

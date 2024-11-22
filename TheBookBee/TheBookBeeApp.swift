@@ -25,16 +25,16 @@ struct TheBookBeeApp: App {
             } else {
                 NavigationStack {
                     if appState.isSignedIn {
-                        PersonalizeView()
-                            .environmentObject(appState)
-                    } else {
                         if !appState.hasCompletedOnboarding {
                             OnboardingView()
                                 .environmentObject(appState)
                         } else {
-                            SignInView()
-                                .environmentObject(appState)
+                            MainTabView()
+                            .environmentObject(appState)
                         }
+                    } else {
+                        SignInView()
+                            .environmentObject(appState)
                     }
                 }
             }

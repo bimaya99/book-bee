@@ -71,7 +71,7 @@ struct PersonalizeView: View {
             .padding(.horizontal, 20)
             .disabled(isSaving) // Disable button while saving
             
-            NavigationLink(destination: PersonalizeGenreView(), isActive: $navigateToGenreView) {
+            NavigationLink(destination: PersonalizeGenreView().environmentObject(appState), isActive: $navigateToGenreView) {
                 EmptyView()
             }
         }
@@ -103,14 +103,7 @@ struct PersonalizeView: View {
         
         isSaving = true // Show loading state
 
-        // Firebase logic
-        let db = Database.database().reference()
-        let userId = Auth.auth().currentUser?.uid ?? "" // Use the logged-in user's ID
-
-        db.child("users/\(userId)").updateChildValues([
-            "yearlyGoal": yearlyGoalInt,
-            "dailyReadingGoal": dailyMinutes
-        ]) { error, _ in
+        appState.saveGoals(yearlyGoal: yearlyGoalInt, dailyReadingGoal: dailyMinutes) { error in
             isSaving = false // Reset loading state
             
             if let error = error {
