@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>462750976534-h734oq7v41oju4uokaajkmjll0isf3hk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.462750976534-h734oq7v41oju4uokaajkmjll0isf3hk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBnz7ahVuYNo9Q9XEaZMkcAKP_GqWbf8aA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>462750976534</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>nibm.TheBookBee</string>
+	<key>PROJECT_ID</key>
+	<string>the-bookbee</string>
+	<key>STORAGE_BUCKET</key>
+	<string>the-bookbee.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:462750976534:ios:856299e809a9c71d874337</string>
+</dict>
+</plist>

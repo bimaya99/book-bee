@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>nibm.TheBookBee</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundleName</key>
+    <string>TheBookBee</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>We use Face ID to authenticate your identity and provide secure access to your account.</string>
+    <key>GIDClientID</key>
+    <string>462750976534-h734oq7v41oju4uokaajkmjll0isf3hk.apps.googleusercontent.com</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.462750976534-h734oq7v41oju4uokaajkmjll0isf3hk</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>
